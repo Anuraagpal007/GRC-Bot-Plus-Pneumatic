@@ -21,12 +21,32 @@ ISR(SPI_STC_vect)
   if (SPDR != 135) {
     button = SPDR;
   }
-  //  Serial.print("Button - "); Serial.println(button);
+  //    Serial.print("Button - "); Serial.println(button);
   resetMillis = currentMillis;
 }
 
 void loop()
 {
+//
+//  while (1) {
+//    //    GrabMotor.clk(100);
+//    //    delay(1000);
+//    //    GrabMotor.brake();
+//    //    delay(1000);
+//    //    GrabMotor.aclk(100);
+//    //    delay(1000);
+//    //    GrabMotor.brake();
+//    //    delay(1000);
+//    Thrower.Close();
+//    delay(1000);
+//    Thrower.Open();
+//    delay(1000);
+//    Grabber.Close();
+//    delay(1000);
+//    Grabber.Open();
+//    delay(1000);
+//    
+//  }
   //  Serial.println(currentMillis - startMillis);
   currentMillis = millis();
   if (abs(currentMillis - resetMillis) > 1000) {
@@ -39,42 +59,42 @@ void loop()
   {
     case UP:
       forward();
-      //      Serial.println("Forward");
+      Serial.println("Forward");
       break;
 
     case DOWN:
       backward();
-      //      Serial.println("Back");
+      Serial.println("Back");
       break;
 
     case LEFT:
       left();
-      //      Serial.println("Left");
+      Serial.println("Left");
       break;
 
     case RIGHT:
       right();
-      //      Serial.println("Right");
+      Serial.println("Right");
       break;
 
     case UPRIGHT:
       bot.upRight(80);
-      //      Serial.println("UR");
+      Serial.println("UR");
       break;
 
     case UPLEFT:
       bot.upLeft(80);
-      //      Serial.println("UL");
+      Serial.println("UL");
       break;
 
     case DOWNRIGHT:
       bot.downRight(80);
-      //      Serial.println("DR");
+      Serial.println("DR");
       break;
 
     case DOWNLEFT:
       bot.downLeft(80);
-      //      Serial.println("DL");
+      Serial.println("DL");
       break;
 
     case CLOCKWISE:
@@ -190,8 +210,10 @@ void loop()
       delay(500);
       grabberAclk(3500);
       GrabMotor.brake();
+      delay(2000);
       mpu6050.update();
-      while (mpu6050.getAngleZ() > -20) {
+      int angleOffset = mpu6050.getAngleZ();
+      while (abs(mpu6050.getAngleZ() - angleOffset) < 20) {
         mpu6050.update();
         Serial.println(mpu6050.getAngleZ());
         bot.aclk(50, 50, 50, 50);
@@ -223,9 +245,13 @@ void loop()
     case PS:
       Serial.println("Reset");
       resetFunc();
+      //      Serial.println("Brake");
+      //      bot.brake();
+      //      GrabMotor.brake();
       break;
 
     default:
+      Serial.println("Brake");
       bot.brake();
       GrabMotor.brake();
       break;
@@ -263,8 +289,6 @@ void grabberClk(int pulses)
   }
   GrabMotor.brake();
 }
-
-
 
 void stopGrabberMotor()
 {
