@@ -33,7 +33,7 @@ void backward() {
   mpu6050.update();
   angleZ =  mpu6050.getAngleZ();
 //  Serial.println(angleZ);
-  if (angleZ < 3 && angleZ > -3)
+  if (angleZ < 3 && angleZ > -5)
   {
     bot.backward(pwm, pwm, pwm, pwm);
   }
