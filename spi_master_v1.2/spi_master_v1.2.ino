@@ -63,6 +63,18 @@ void vspiCommand()
       spi_send(L2);
       Print("R1-2");
     }
+    else if(Ps3.data.button.up && Ps3.data.button.triangle) {
+      spi_send(UPTHROW);
+    }
+    else if(Ps3.data.button.down && Ps3.data.button.triangle) {
+      spi_send(DOWNTHROW);
+    }
+    else if(Ps3.data.button.left && Ps3.data.button.triangle) {
+      spi_send(LEFTTHROW);
+    }
+    else if(Ps3.data.button.right && Ps3.data.button.triangle) {
+      spi_send(RIGHTTHROW);
+    }
     else if ( (Ps3.data.analog.stick.rx >= -128  && Ps3.data.analog.stick.rx < -1) &&
               (Ps3.data.analog.stick.ry >= -128  && Ps3.data.analog.stick.ry < -1)) {
       spi_send(UPLEFT);

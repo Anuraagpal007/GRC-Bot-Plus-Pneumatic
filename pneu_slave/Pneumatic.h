@@ -1,9 +1,9 @@
 class Pneumatic {
   private:
-    int pin1, pin2;
+    uint8_t pin1, pin2;
   public:
   Pneumatic (){};
-    Pneumatic(int pin1, int pin2) {
+    Pneumatic(uint8_t pin1, uint8_t pin2) {
       this->pin1 = pin1;
       this->pin2 = pin2;
       pinMode(pin1, OUTPUT);

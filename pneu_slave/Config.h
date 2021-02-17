@@ -42,14 +42,14 @@ MPU6050 mpu6050(Wire);
 
 
 // Variables- -----------------------------------------
-int reedCount = 0;
+byte reedCount = 0;
 byte button = 0;
-float angleZ = 0;
+float b = 0 ;
+
+bool throwerFlag = 0;
 
 // List of millis -------------------------
 
-unsigned long startMillis = 0;
-unsigned long selectMillis = 0;
 unsigned long resetMillis = 0;
 unsigned long currentMillis = 0;
 
@@ -67,37 +67,6 @@ Motor motor3(m3p, m3d);
 Motor motor4(m4p, m4d);
 
 Bot bot(motor1, motor2, motor3, motor4);
-
-
-
-// Custom functions ----------------------------------
-void pinModes()
-{
-  pinMode(GrabP1, OUTPUT);
-  pinMode(GrabP2, OUTPUT);
-  pinMode(ThrowP1, OUTPUT);
-  pinMode(ThrowP2, OUTPUT);
-  pinMode(reedPin, INPUT_PULLUP);
-  pinMode(limitClkPin, INPUT_PULLUP); 
-  pinMode(limitAclkPin, INPUT_PULLUP); 
-  pinMode(MISO, OUTPUT);
-}
-
-void relaysOff()
-{
-  digitalWrite(GrabP1, HIGH);
-  digitalWrite(GrabP2, HIGH);
-  digitalWrite(ThrowP1, HIGH);
-  digitalWrite(ThrowP2, HIGH);
-}
-
-void mpuSetup() {
-  Wire.begin();
-  mpu6050.begin();
-  mpu6050.calcGyroOffsets(true);
-}
-
-void (*resetFunc)(void) = 0;
 
 // Constants for PS ------------------------------
 #define UP 1
@@ -129,3 +98,8 @@ void (*resetFunc)(void) = 0;
 #define JOYRIGHT 27
 #define JOYDOWN 28
 #define JOYLEFT 29
+
+#define UPTHROW 50
+#define DOWNTHROW 51
+#define LEFTTHROW 52
+#define RIGHTTHROW 53

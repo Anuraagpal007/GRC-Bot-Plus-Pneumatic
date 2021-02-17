@@ -3,7 +3,7 @@ class Motor {
     uint8_t input_1, pwm_pin, input_2;
   public:
     Motor() {};
-    Motor( int pwm_pin, int input_1, int input_2 = 100) {
+    Motor( uint8_t pwm_pin, uint8_t input_1, uint8_t input_2 = 100) {
       this->input_1 = input_1;
       this->input_2 = input_2;
       this->pwm_pin = pwm_pin;

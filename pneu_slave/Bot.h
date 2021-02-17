@@ -13,7 +13,7 @@ class Bot
       this->m3 = m3;
       this->m4 = m4;
     }
-    void left(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void left(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
 
       
       m1.aclk(pwm1);
@@ -22,65 +22,66 @@ class Bot
       m4.aclk(pwm4);
 
     }
-    void right(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void right(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
 
       m1.clk(pwm1);
       m2.aclk(pwm2);
       m3.aclk(pwm3);
       m4.clk(pwm4);
     }
-    void backward(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void backward(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
 
       m1.clk(pwm1);
       m2.clk(pwm2);
       m3.aclk(pwm3);
       m4.aclk(pwm4);
 
-
     }
-    void forward(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void forward(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
       m1.aclk(pwm1);
       m2.aclk(pwm2);
       m3.clk(pwm3);
       m4.clk(pwm4);
     }
-    void downLeft(int pwm) {
+    void downLeft(byte pwm) {
 
       m1.brake();
       m2.clk(pwm);
       m3.brake();
       m4.aclk(pwm);
     }
-    void downRight(int pwm) {
+    void downRight(byte pwm) {
 
       m1.aclk(pwm);
       m2.brake();
       m3.clk(pwm);
       m4.brake();
     }
-    void upLeft(int pwm) {
+    void upLeft(byte pwm) {
       m1.clk(pwm);
       m2.brake();
       m3.aclk(pwm);
       m4.brake();
     }
-    void upRight(int pwm) {
+    void upRight(byte pwm) {
       m1.brake();
       m2.aclk(pwm);
       m3.brake();
       m4.clk(pwm);
     }
-    void clk(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void clk(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
       m1.aclk(pwm1);
       m2.aclk(pwm2);
       m3.aclk(pwm3);
       m4.aclk(pwm4);
+//      
     }
-    void aclk(int pwm1, int pwm2, int pwm3, int pwm4) {
+    void aclk(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
       m1.clk(pwm1);
       m2.clk(pwm2);
       m3.clk(pwm3);
       m4.clk(pwm4);
+//      mpu6050.calcGyroOffsets(true);
     }
     void brake() {
       m1.brake();
@@ -88,7 +89,7 @@ class Bot
       m3.brake();
       m4.brake();
     }
-    void testMotors(int pwm) {
+    void testMotors(byte pwm) {
       m1.clk(pwm);
       delay(3000);
       m1.aclk(pwm);
