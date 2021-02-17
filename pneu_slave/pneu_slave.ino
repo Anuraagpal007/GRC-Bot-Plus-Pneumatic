@@ -23,6 +23,7 @@ ISR(SPI_STC_vect)
 
 void loop()
 {
+ 
   currentMillis = millis();
   if (abs(currentMillis - resetMillis) > 1000) {
     resetFunc();
@@ -50,34 +51,6 @@ void loop()
 
     case RIGHT:
       right();
-      checkReedCount();     
-      //      Serial.println("Right");
-      break;
-
-    case UPTHROW:
-      forward();
-      Thrower.Open();
-      checkReedCount();      
-      //      Serial.println("Forward");
-      break;
-
-    case DOWNTHROW:
-      backward();
-      Thrower.Open();
-      checkReedCount();    
-      //      Serial.println("Back");
-      break;
-
-    case LEFTTHROW:
-      left();
-      Thrower.Open();
-      checkReedCount();
-      //      Serial.println("Left");
-      break;
-
-    case RIGHTTHROW:
-      right();
-      Thrower.Open();
       checkReedCount();     
       //      Serial.println("Right");
       break;

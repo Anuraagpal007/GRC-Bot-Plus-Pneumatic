@@ -99,7 +99,7 @@ Bot bot(motor1, motor2, motor3, motor4);
 #define JOYDOWN 28
 #define JOYLEFT 29
 
-#define UPTHROW 50
-#define DOWNTHROW 51
-#define LEFTTHROW 52
-#define RIGHTTHROW 53
+//#define UPTHROW 50
+//#define DOWNTHROW 51
+//#define LEFTTHROW 52
+//#define RIGHTTHROW 53
