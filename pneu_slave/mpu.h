@@ -8,7 +8,7 @@
 
 #include "Func.h"
 
-byte pwm = 120;
+byte pwm = 100;
 byte offset = 20;
 
 void forward() {

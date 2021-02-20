@@ -14,7 +14,7 @@ void checkReedCount() {
       reedCount = 0 ;
       throwerFlag = 0;
     }
-  }
+  } 
 }
 
 void pinModes()
@@ -71,12 +71,12 @@ void stopGrabberMotor()
     GrabEnc.write(0);
     if (limitClk == LOW && limitAclk == HIGH)
     {
-      grabberAclk(30);
+      grabberAclk(25);
       GrabEnc.write(0);
     }
     else if (limitAclk == LOW && limitClk == HIGH)
     {
-      grabberClk(30);
+      grabberClk(25);
       GrabEnc.write(0);
     }
   }

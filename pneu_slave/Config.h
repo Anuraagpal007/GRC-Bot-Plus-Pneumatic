@@ -45,8 +45,8 @@ MPU6050 mpu6050(Wire);
 byte reedCount = 0;
 byte button = 0;
 float b = 0 ;
-
 bool throwerFlag = 0;
+int angle = 0;
 
 // List of millis -------------------------
 

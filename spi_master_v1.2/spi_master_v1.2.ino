@@ -32,6 +32,8 @@ void vspiCommand()
   /***********************PS3 CONNECTED************************************************/
   if (Ps3.isConnected()) {
     digitalWrite(2, 1);
+
+    
     /*************************JOYSTICK ARRAYED DATA**********************************************/
     joy_map();
     for (byte i = 0; i < sizeof joy; i++) {

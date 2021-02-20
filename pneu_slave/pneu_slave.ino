@@ -23,23 +23,23 @@ ISR(SPI_STC_vect)
 
 void loop()
 {
- 
   currentMillis = millis();
-  if (abs(currentMillis - resetMillis) > 1000) {
+  if (abs(currentMillis - resetMillis) > 500) {
     resetFunc();
   }
+  Serial.println(readEncoder);
   stopGrabberMotor();
   switch (button)
   {
     case UP:
       forward();
-      checkReedCount();      
+      checkReedCount();
       //      Serial.println("Forward");
       break;
 
     case DOWN:
       backward();
-      checkReedCount();    
+      checkReedCount();
       //      Serial.println("Back");
       break;
 
@@ -51,7 +51,7 @@ void loop()
 
     case RIGHT:
       right();
-      checkReedCount();     
+      checkReedCount();
       //      Serial.println("Right");
       break;
 
@@ -76,12 +76,12 @@ void loop()
       break;
 
     case CLOCKWISE:
-      bot.clk(80, 80, 80, 80);
+      bot.clk(50, 50, 50, 50);
       //      Serial.println("clk");
       break;
 
     case ANTICLOCKWISE:
-      bot.aclk(80, 80, 80, 80);
+      bot.aclk(50, 50, 50, 50);
       break;
     //
     case L2:
@@ -130,6 +130,8 @@ void loop()
 
     case TRIANGLE:
       Serial.println("Thrower Up");
+      //      Thrower.Open();
+      //      delayMicroseconds(410);
       Thrower.Free();
       throwerFlag = 1;
       break;
@@ -137,38 +139,44 @@ void loop()
     case START:
 
       Grabber.Close();
+      delay(200);
       grabberAclk(100);
       bot.forward(50, 50, 50, 50);
-      delay(700);
+      delay(800);
       bot.brake();
-
+   
       break;
 
     case SELECT:
 
-      //      GrabEnc.write(0);
-      //      grabberAclk(2400);
-      //      delay(1000);
-      //      Thrower.Close();
-      //      delay(1000);
-      //      grabberAclk(2800);
-      //      Grabber.Open();
-      //      delay(1000);
-      //      grabberAclk(3500);
-      //      GrabMotor.brake();
+      GrabEnc.write(0);
+      grabberAclk(2400);
+      delay(1000);
+      Thrower.Close();
+      throwerFlag = 0;
+      delay(1000);
+      grabberAclk(3200);
+      Grabber.Open();
+      delay(1000);
+      grabberAclk(3500);
+      GrabMotor.brake();
+
+      // Code for alignment with MPU, don't uncomment if not asked to
+      //
       //      mpu6050.update();
       //      angle = mpu6050.getAngleZ();
-      //      while (abs(mpu6050.getAngleZ() - angleZ) < 20) {
+      //      while (abs(mpu6050.getAngleZ() - angle) < 20) {
       //        mpu6050.update();
       //        Serial.print("Angle - ");
-      //        Serial.println(abs(mpu6050.getAngleZ() - angleZ));
+      //        Serial.println(abs(mpu6050.getAngleZ() - angle));
       //        bot.aclk(50, 50, 50, 50);
       //      }
       //      Serial.println("Bot at the position");
       //      bot.brake();
       //      bot.clk(50, 50, 50, 50);
       //      delay(70);
-      //      bot.brake();
+      //      Thrower.Free();
+      //      throwerFlag = 1;
       break;
 
     case PS:
