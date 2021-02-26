@@ -28,6 +28,8 @@
 #define JOYRIGHT 27
 #define JOYDOWN 28
 #define JOYLEFT 29
+#define AUTOMATIC 99
+#define MANUAL 100
 
 //#define UPTHROW 50
 //#define DOWNTHROW 51

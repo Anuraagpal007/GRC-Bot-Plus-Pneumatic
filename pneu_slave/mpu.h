@@ -8,10 +8,10 @@
 
 #include "Func.h"
 
-byte pwm = 100;
+//byte pwm = 50;
 byte offset = 20;
 
-void forward() {
+void forward(byte pwm = 100) {
   mpu6050.update();
 
   b =  mpu6050.getAngleZ();
@@ -31,7 +31,7 @@ void forward() {
   }
 }
 
-void backward() {
+void backward(byte pwm = 100) {
   mpu6050.update();
   b = mpu6050.getAngleZ();
   //  Serial.println(a);
@@ -49,7 +49,7 @@ void backward() {
   }
 }
 
-void left() {
+void left(byte pwm = 100) {
   mpu6050.update();
   b = mpu6050.getAngleZ();
   if (b < 3 && b > -3)
@@ -70,7 +70,7 @@ void left() {
 }
 
 
-void right() {
+void right(byte pwm = 100) {
   mpu6050.update();
   b = mpu6050.getAngleZ();
   if (b < 3 && b > -3)

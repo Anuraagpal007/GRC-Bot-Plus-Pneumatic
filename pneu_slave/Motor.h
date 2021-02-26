@@ -27,3 +27,8 @@ class Motor {
       analogWrite(pwm_pin, 0);
     }
 };
+
+
+// pneu_Slave --> mpu.h --> Func.h --> Config.h --> Bot.h --> Motor.h
+//                                              --> Pneumatic.h  
+// 

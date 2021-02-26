@@ -1,4 +1,4 @@
-#include "mpu.h"
+#include "Auto.h"
 #include <SPI.h>
 void setup()
 {
@@ -9,6 +9,7 @@ void setup()
   pinModes();
   relaysOff();
   mpuSetup();
+  tfMiniSetup();
   Serial.println("setup khatam");
 }
 
@@ -17,20 +18,31 @@ ISR(SPI_STC_vect)
   if (SPDR != 135) {
     button = SPDR;
   }
-  //  Serial.print("Button - "); Serial.println(button);
+  Serial.print("Button - "); Serial.println(button);
   resetMillis = currentMillis;
 }
 
 void loop()
 {
+  //  while (1) {
+  //  Serial.println(limitAclk);
+  //  Serial.print(tfmini2.getDistance());
+  //  Serial.print(" - ");
+  //  Serial.println(tfmini1.getDistance());
+  //  delay(25);
+  //  }
+
   currentMillis = millis();
   if (abs(currentMillis - resetMillis) > 500) {
     resetFunc();
   }
-  Serial.println(readEncoder);
+
   stopGrabberMotor();
   switch (button)
   {
+    case R3:
+      autoTask();
+
     case UP:
       forward();
       checkReedCount();
@@ -56,49 +68,51 @@ void loop()
       break;
 
     case UPRIGHT:
-      bot.upRight(80);
+      bot.upRight(100);
       //      Serial.println("UR");
       break;
 
     case UPLEFT:
-      bot.upLeft(80);
+      bot.upLeft(100);
       //      Serial.println("UL");
       break;
 
     case DOWNRIGHT:
-      bot.downRight(80);
+      bot.downRight(100);
       //      Serial.println("DR");
       break;
 
     case DOWNLEFT:
-      bot.downLeft(80);
+      bot.downLeft(100);
       //      Serial.println("DL");
       break;
 
     case CLOCKWISE:
-      bot.clk(50, 50, 50, 50);
+      bot.clk(50);
+      mpuSetup();
       //      Serial.println("clk");
       break;
 
     case ANTICLOCKWISE:
-      bot.aclk(50, 50, 50, 50);
+      bot.aclk(50);
+      mpuSetup();
       break;
     //
-    case L2:
-      if (pwm > 110) {
-        pwm -= 20;
-      }
-      //      Serial.println("Decrease by 20 - ");
-      //      Serial.println(pwm);
-      break;
-
-    case R2:
-      if (pwm < 250) {
-        pwm += 20;
-      }
-      //      Serial.println("INcrease by 20 - ");
-      //      Serial.println(pwm);
-      break;
+    //    case L2:
+    //      if (pwm > 110) {
+    //        pwm -= 20;
+    //      }
+    //      //      Serial.println("Decrease by 20 - ");
+    //      //      Serial.println(pwm);
+    //      break;
+    //
+    //    case R2:
+    //      if (pwm < 250) {
+    //        pwm += 20;
+    //      }
+    //      //      Serial.println("INcrease by 20 - ");
+    //      //      Serial.println(pwm);
+    //      break;
 
     case JOYRIGHT:
       GrabMotor.clk(100);
@@ -144,16 +158,18 @@ void loop()
       bot.forward(50, 50, 50, 50);
       delay(800);
       bot.brake();
-   
+
       break;
 
     case SELECT:
-
+      Thrower.Free();
       GrabEnc.write(0);
       grabberAclk(2400);
       delay(1000);
       Thrower.Close();
-      throwerFlag = 0;
+      delay(300);
+      Thrower.Free();
+      throwerFlag = 1;
       delay(1000);
       grabberAclk(3200);
       Grabber.Open();
@@ -189,6 +205,9 @@ void loop()
       GrabMotor.brake();
       break;
   }
-  //  Serial.println(mpu6050.getAngleZ());
-  checkReedCount();
+  Serial.println(mpu6050.getAngleZ());
+  //  Serial.println(tfmini2.getDistance());
+  //  checkReedCount();
+  //  Serial.println(readEncoder);
+
 }

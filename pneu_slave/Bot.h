@@ -69,19 +69,19 @@ class Bot
       m3.brake();
       m4.clk(pwm);
     }
-    void clk(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
+    void clk(byte pwm1) {
       m1.aclk(pwm1);
-      m2.aclk(pwm2);
-      m3.aclk(pwm3);
-      m4.aclk(pwm4);
-//      
+      m2.aclk(pwm1);
+      m3.aclk(pwm1);
+      m4.aclk(pwm1);
+      
     }
-    void aclk(byte pwm1, byte pwm2, byte pwm3, byte pwm4) {
+    void aclk(byte pwm1) {
       m1.clk(pwm1);
-      m2.clk(pwm2);
-      m3.clk(pwm3);
-      m4.clk(pwm4);
-//      mpu6050.calcGyroOffsets(true);
+      m2.clk(pwm1);
+      m3.clk(pwm1);
+      m4.clk(pwm1);
+     
     }
     void brake() {
       m1.brake();

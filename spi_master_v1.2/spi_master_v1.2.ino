@@ -1,4 +1,4 @@
-#include "setup.h"
+ #include "setup.h"
 void setup()
 {
   pinMode(5, OUTPUT);
@@ -65,12 +65,12 @@ void vspiCommand()
       spi_send(L2);
       Print("R1-2");
     }
-//    else if(Ps3.data.button.up && Ps3.data.button.triangle) {
-//      spi_send(UPTHROW);
-//    }
-//    else if(Ps3.data.button.down && Ps3.data.button.triangle) {
-//      spi_send(DOWNTHROW);
-//    }
+    else if(Ps3.data.button.select && Ps3.data.button.start) {
+      spi_send(AUTOMATIC);
+    }
+    else if(Ps3.data.button.L3 && Ps3.data.button.R3) {
+      spi_send(MANUAL);
+    }
 //    else if(Ps3.data.button.left && Ps3.data.button.triangle) {
 //      spi_send(LEFTTHROW);
 //    }

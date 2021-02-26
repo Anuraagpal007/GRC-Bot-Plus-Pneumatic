@@ -1,6 +1,7 @@
 // Include headers and libraries ---------------------
 #include "Bot.h"
 #include "Pneumatic.h"
+#include "TFMini.h"
 #include <Encoder.h>
 #include <MPU6050_tockn.h>
 #include<Wire.h>
@@ -8,13 +9,13 @@ MPU6050 mpu6050(Wire);
 
 // Definition of pins ---------------------------------
 // Relay in order from vcc - 43, 45, 41, A12
-#define ThrowP1 A12
-#define ThrowP2 41
-#define GrabP1 45
-#define GrabP2 43
+#define ThrowP1 41
+#define ThrowP2 35
+#define GrabP1 39
+#define GrabP2 37
 
 #define limitClkPin A6
-#define limitAclkPin A0
+#define limitAclkPin A2
 #define reedPin A7
 
 // Motor pinouts
@@ -56,7 +57,9 @@ unsigned long currentMillis = 0;
 
 // Creating objects of classes-------------------------
 Motor GrabMotor(Grab_pwm, Grab_in1, Grab_in2);
-Encoder GrabEnc(2, 3);
+Encoder GrabEnc(18,2);
+TFMini tfmini1;
+TFMini tfmini2;
 Pneumatic Thrower(ThrowP1, ThrowP2);
 Pneumatic Grabber(GrabP1, GrabP2);
 
@@ -98,6 +101,8 @@ Bot bot(motor1, motor2, motor3, motor4);
 #define JOYRIGHT 27
 #define JOYDOWN 28
 #define JOYLEFT 29
+#define AUTOMATIC 99
+#define MANUAL 100
 
 //#define UPTHROW 50
 //#define DOWNTHROW 51
